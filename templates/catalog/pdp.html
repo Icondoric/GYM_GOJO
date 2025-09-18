@@ -1,15 +1,33 @@
 {% extends "base.html" %}{% block content %}
-<h1>{{object.name}}</h1>
-<p>{{object.description}}</p>
-<ul>
-  {% for v in object.variants.all %}
-    <li>{{v.sku}} - {{v.flavor}} {{v.size}}: {{v.price}} · Stock: {{v.stock}}
-      <a href="/cart/add/{{v.id}}/">Añadir</a>
-    </li>
-  {% empty %}<li>Sin variantes</li>{% endfor %}
-</ul>
-<h3>Ingredientes</h3>
-<ul>{% for i in object.ingredients.all %}<li>{{i.name}} {{i.amount}}</li>{% empty %}<li>-</li>{% endfor %}</ul>
-<h3>Especificaciones</h3>
-<ul>{% for s in object.specs.all %}<li>{{s.name}}: {{s.value}}</li>{% empty %}<li>-</li>{% endfor %}</ul>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+  <div>
+    {% if object.media.all %}
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        {% for m in object.media.all %}
+          {% if m.image %}
+            <img src="{{ m.image.url }}" alt="{{ m.alt|default:object.name }}" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;{% if m.is_primary %}outline:3px solid #0f0;{% endif %}">
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <div style="width:100%;aspect-ratio:1/1;background:#222;border-radius:10px;border:1px solid #444;"></div>
+    {% endif %}
+  </div>
+
+  <div>
+    <h1>{{ object.name }}</h1>
+    <p>{{ object.description }}</p>
+    <ul>
+      {% for v in object.variants.all %}
+        <li>{{v.sku}} - {{v.flavor}} {{v.size}}: {{v.price}} · Stock: {{v.stock}}
+          <a href="/cart/add/{{v.id}}/">Añadir</a>
+        </li>
+      {% empty %}<li>Sin variantes</li>{% endfor %}
+    </ul>
+    <h3>Ingredientes</h3>
+    <ul>{% for i in object.ingredients.all %}<li>{{i.name}} {{i.amount}}</li>{% empty %}<li>-</li>{% endfor %}</ul>
+    <h3>Especificaciones</h3>
+    <ul>{% for s in object.specs.all %}<li>{{s.name}}: {{s.value}}</li>{% empty %}<li>-</li>{% endfor %}</ul>
+  </div>
+</div>
 {% endblock %}

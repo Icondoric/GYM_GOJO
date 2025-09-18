@@ -1,9 +1,544 @@
-*{box-sizing:border-box} body{font-family:system-ui,Segoe UI,Roboto,Arial;margin:0;line-height:1.5;background:#111;color:#eee}
-a{color:#8ef} .container{max-width:1100px;margin:0 auto;padding:16px}
-.header{position:sticky;top:0;background:#000;padding:8px 16px;display:flex;gap:16px;align-items:center;border-bottom:1px solid #333;z-index:5}
-.logo{font-weight:800;font-size:22px;color:#0f0}
-.header nav a{margin:0 8px}
-input{padding:8px;border-radius:8px;border:1px solid #333;background:#111;color:#eee}
-button{padding:10px 14px;border:1px solid #333;background:#0f0;color:#000;border-radius:10px;cursor:pointer}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
-.footer{padding:24px;text-align:center;border-top:1px solid #333;background:#000;color:#aaa}
+/* ================================
+   GOYO UI — Clean, Strong & Responsive
+   Tipografías y Variables de Diseño
+   ================================ */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Lato:wght@400;500;700&display=swap');
+
+:root {
+    /* Paleta (tu guía) */
+    --blue: #007BFF;
+    /* Azul Eléctrico (Primary / CTAs) */
+    --dark: #343A40;
+    /* Gris Oscuro (texto/sections oscuras) */
+    --green: #28A745;
+    /* Verde Neón (éxito/resaltado) */
+    --gray: #E9ECEF;
+    /* Gris Claro (fondos/bordes) */
+    --white: #FFFFFF;
+    /* Texto en fondos oscuros / base */
+    --red: #DC3545;
+    /* Errores/advertencias */
+
+    /* Derivados */
+    --text: #212529;
+    /* Texto base en fondos claros */
+    --muted: #6C757D;
+    /* Texto secundario */
+    --bg: #F8F9FA;
+    /* Fondo principal claro */
+    --card: #FFFFFF;
+    /* Fondo de tarjetas */
+    --border: #DEE2E6;
+    /* Bordes sutiles */
+
+    --radius: 14px;
+    --radius-sm: 10px;
+    --shadow: 0 10px 24px rgba(33, 37, 41, .10);
+    --shadow-sm: 0 6px 16px rgba(33, 37, 41, .08);
+
+    --container: 1200px;
+}
+
+/* Reset & base */
+* {
+    box-sizing: border-box
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0
+}
+
+body {
+    font-family: Lato, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: Montserrat, Lato, sans-serif;
+    color: var(--dark);
+    margin: 0 0 .5rem
+}
+
+p {
+    margin: .5rem 0 1rem
+}
+
+a {
+    text-decoration: none;
+    color: var(--blue)
+}
+
+.container {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 16px
+}
+
+/* ================================
+   NAVBAR
+   ================================ */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+}
+
+.logo {
+    font-family: Montserrat;
+    font-weight: 800;
+    letter-spacing: .5px;
+    font-size: 22px;
+    color: var(--blue)
+}
+
+.navlinks {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-left: 8px
+}
+
+.navlinks a {
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: var(--dark);
+    transition: background .15s ease, color .15s ease;
+}
+
+.navlinks a:hover {
+    background: var(--gray)
+}
+
+.actions {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+    align-items: center
+}
+
+/* Búsqueda */
+.search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 12px;
+    background: var(--white);
+    min-width: 260px;
+    max-width: 440px;
+    flex: 1;
+}
+
+.search input {
+    all: unset;
+    flex: 1;
+    font-size: 14px;
+    color: var(--text)
+}
+
+.search svg {
+    opacity: .7
+}
+
+/* Botones */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .15s ease, background .15s ease, color .15s;
+    background: var(--white);
+    color: var(--dark);
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm)
+}
+
+.btn.primary {
+    background: var(--blue);
+    color: var(--white);
+    border-color: #0069d9
+}
+
+.btn.primary:hover {
+    background: #0069d9
+}
+
+.btn.success {
+    background: var(--green);
+    color: var(--white);
+    border-color: #1e7e34
+}
+
+.btn.ghost {
+    background: transparent
+}
+
+/* Mobile toggler */
+.toggler {
+    display: none;
+    border: 1px solid var(--border);
+    background: var(--white);
+    padding: 8px 10px;
+    border-radius: 8px;
+}
+
+/* Menú móvil */
+.mobile {
+    display: none;
+    border-top: 1px solid var(--border);
+    padding: 10px 0
+}
+
+.mobile a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: var(--dark)
+}
+
+.mobile a:hover {
+    background: var(--gray)
+}
+
+/* ================================
+   HERO + Layout principal
+   ================================ */
+.hero {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 28px;
+    align-items: center;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: var(--shadow);
+    margin: 18px 0;
+}
+
+.hero h1 {
+    font-size: 40px;
+    line-height: 1.15;
+    color: var(--dark)
+}
+
+.hero p {
+    color: var(--muted);
+    font-size: 16px
+}
+
+.hero .cta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap
+}
+
+.hero .panel {
+    background: linear-gradient(180deg, rgba(0, 123, 255, .10), rgba(0, 0, 0, 0)), var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px
+}
+
+/* ================================
+   Bento Grid (categorías)
+   ================================ */
+.bento {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+    margin: 22px 0
+}
+
+.tile {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow-sm);
+    transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+.tile:hover {
+    transform: translateY(-2px);
+    border-color: #cdd3da;
+    box-shadow: var(--shadow)
+}
+
+.tile h3 {
+    margin: 0 0 6px;
+    font-size: 18px;
+    color: var(--dark)
+}
+
+.tile p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px
+}
+
+.tile.accent {
+    background: linear-gradient(180deg, rgba(0, 123, 255, .08), rgba(255, 255, 255, 1)), var(--card)
+}
+
+.span-3 {
+    grid-column: span 3
+}
+
+.span-2 {
+    grid-column: span 2
+}
+
+.span-1 {
+    grid-column: span 1
+}
+
+/* ================================
+   Cards / Grids
+   ================================ */
+.section {
+    margin: 28px 0
+}
+
+.section h2 {
+    font-size: 24px
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+    box-shadow: var(--shadow-sm)
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    border-color: #cdd3da;
+    box-shadow: var(--shadow)
+}
+
+.thumb {
+    aspect-ratio: 1/1;
+    width: 100%;
+    object-fit: cover;
+    background: var(--gray)
+}
+
+.body {
+    padding: 12px
+}
+
+.title {
+    font-weight: 700;
+    color: var(--dark);
+    margin: 2px 0 6px
+}
+
+.desc {
+    color: var(--muted);
+    font-size: 14px;
+    height: 40px;
+    overflow: hidden
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px
+}
+
+.price {
+    font-weight: 800;
+    color: var(--dark)
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    border: 1px solid var(--border);
+    color: var(--dark);
+    background: var(--gray)
+}
+
+.badge.new {
+    background: #d6e9ff;
+    border-color: #bcdcff;
+    color: #004085
+}
+
+.badge.off {
+    background: #ffe0e3;
+    border-color: #ffc2c7;
+    color: #a10012
+}
+
+.badge.ok {
+    background: #dcf7e6;
+    border-color: #acecc4;
+    color: #145a2b
+}
+
+/* Bands (brands/testimonials) */
+.brands {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap
+}
+
+.brand {
+    padding: 10px 14px;
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    background: var(--white);
+    color: var(--muted)
+}
+
+.testi {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px
+}
+
+.quote {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    color: var(--dark)
+}
+
+/* Alertas (verde/rojo para feedback) */
+.alert {
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--white)
+}
+
+.alert.success {
+    border-color: #bfe6cb;
+    background: #e9f7ef;
+    color: #145a2b
+}
+
+.alert.error {
+    border-color: #f5c2c7;
+    background: #f8d7da;
+    color: #842029
+}
+
+/* ================================
+   Footer
+   ================================ */
+.footer {
+    margin-top: 36px;
+    padding: 28px 0;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    background: #fff
+}
+
+/* ================================
+   Responsive
+   ================================ */
+@media (max-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr)
+    }
+
+    .bento {
+        grid-template-columns: repeat(4, 1fr)
+    }
+}
+
+@media (max-width: 900px) {
+    .navbar {
+        gap: 10px
+    }
+
+    .toggler {
+        display: inline-flex
+    }
+
+    .navlinks {
+        display: none
+    }
+
+    .actions {
+        margin-left: 0
+    }
+
+    .hero {
+        grid-template-columns: 1fr
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr)
+    }
+
+    .bento {
+        grid-template-columns: repeat(2, 1fr)
+    }
+
+    .mobile {
+        display: block
+    }
+}
+
+@media (max-width: 520px) {
+    .grid {
+        grid-template-columns: 1fr
+    }
+
+    .search {
+        min-width: unset
+    }
+
+    .hero h1 {
+        font-size: 30px
+    }
+}

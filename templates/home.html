@@ -1,13 +1,79 @@
-{% extends "base.html" %}{% block content %}
-<h1>GOYO: tu fuerza, tu tienda</h1>
-<section>
-  <h2>Top ventas</h2>
-  <div class="grid">
-    {% for p in top_sellers %}
-      <article><a href="{{p.get_absolute_url}}">{{p.name}}</a>
-        {% if p.price_min %}<div>Desde {{p.price_min}}</div>{% endif %}
-      </article>
-    {% empty %}<p>Aún no hay productos.</p>{% endfor %}
+{% extends "base.html" %}
+{% block title %}GOYO · Suplementos, Equipos y Ropa Fitness{% endblock %}
+{% block content %}
+
+<section class="hero" aria-labelledby="hero-title">
+  <div>
+    <h1 id="hero-title">Fuerza, energía y comunidad para tu mejor versión</h1>
+    <p>GOYO es tu tienda de <strong>suplementos</strong>, <strong>equipamiento</strong> y <strong>ropa</strong> fitness. Diseñado para principiantes y atletas: limpio, rápido y sin distracciones.</p>
+    <div class="cta">
+      <a href="/catalog/c/suplementos/" class="btn primary">Comprar suplementos</a>
+      <a href="/blog/" class="btn ghost">Leer guías y rutinas</a>
+    </div>
+    <div style="margin-top:12px" class="brands" aria-label="Marcas aliadas">
+      <span class="brand">GOYO</span><span class="brand">Titan</span><span class="brand">PowerFuel</span><span class="brand">IronWear</span><span class="brand">FitLab</span>
+    </div>
+  </div>
+  <div class="panel">
+    <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop" alt="Entrenamiento de fuerza en gimnasio" style="border-radius:12px; aspect-ratio:4/3; object-fit:cover;">
+    <p style="color:#6C757D; margin-top:10px">Productos con fichas claras: ingredientes, especificaciones y tablas de tallas. Compra con confianza.</p>
   </div>
 </section>
+
+<section class="bento" aria-label="Categorías destacadas">
+  <a class="tile span-3 accent" href="/catalog/c/suplementos/">
+    <h3>Proteínas, creatina y más</h3><p>Resultados reales, sin ruido. Ver todo →</p>
+  </a>
+  <a class="tile span-3" href="/catalog/c/equipos/">
+    <h3>Home gym</h3><p>Mancuernas, bancos, racks y bandas.</p>
+  </a>
+  <a class="tile span-2" href="/catalog/c/ropa/">
+    <h3>Ropa técnica</h3><p>Dry-fit, leggings, joggers. S–XL.</p>
+  </a>
+  <a class="tile span-2" href="/catalog/c/ofertas/">
+    <h3>Ofertas y bundles</h3><p>Ahorra combinando tus esenciales.</p>
+  </a>
+  <a class="tile span-2" href="/blog/">
+    <h3>Guías y Nutrición</h3><p>Rutinas, tips y comparativas.</p>
+  </a>
+</section>
+
+<section class="section" aria-labelledby="top-ventas">
+  <h2 id="top-ventas">Top ventas</h2>
+  <div class="grid">
+    {% for p in top_sellers %}
+      <article class="card">
+        <a href="{{ p.get_absolute_url }}">
+          {% with first=p.primary_media %}
+            {% if first and first.image %}
+              <img src="{{ first.image.url }}" alt="{{ first.alt|default:p.name }}" class="thumb">
+            {% else %}
+              <div class="thumb"></div>
+            {% endif %}
+          {% endwith %}
+          <div class="body">
+            <div class="title">{{ p.name }}</div>
+            <div class="desc">{{ p.description|default:"Calidad verificada por atletas."|truncatechars:80 }}</div>
+            <div class="row">
+              <div class="price">{% if p.price_min %}Desde {{ p.price_min }}{% endif %}</div>
+              <span class="badge new">Nuevo</span>
+            </div>
+          </div>
+        </a>
+      </article>
+    {% empty %}
+      <div class="alert">Aún no hay productos destacados.</div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section" aria-labelledby="testimonios">
+  <h2 id="testimonios">Comunidad GOYO</h2>
+  <div class="testi">
+    <div class="quote">“La creatina llegó rápido y con seguimiento. Subí mis PR en 3 semanas.” — <strong>Ale</strong></div>
+    <div class="quote">“La guía de proteínas me ayudó a elegir sin dudarlas.” — <strong>Vale</strong></div>
+    <div class="quote">“Armé mi home gym con sus packs. Excelente calidad/precio.” — <strong>Miguel</strong></div>
+  </div>
+</section>
+
 {% endblock %}

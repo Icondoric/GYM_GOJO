@@ -1,10 +1,28 @@
 {% extends "base.html" %}{% block content %}
-<h1>Productos en {{category.name}}</h1>
+<h1>{{ category.name }}</h1>
 <div class="grid">
   {% for p in products %}
-    <article><a href="{{p.get_absolute_url}}">{{p.name}}</a>
-    {% if p.price_min %}<div>Desde {{p.price_min}}</div>{% endif %}
+    <article class="card">
+      <a href="{{ p.get_absolute_url }}">
+        {% with m=p.primary_media %}
+          {% if m and m.image %}
+            <img src="{{ m.image.url }}" alt="{{ m.alt|default:p.name }}" class="thumb">
+          {% else %}
+            <div class="thumb" style="background:var(--panel-2)"></div>
+          {% endif %}
+        {% endwith %}
+        <div class="body">
+          <div class="title">{{ p.name }}</div>
+          <div class="desc">{{ p.description|truncatechars:80 }}</div>
+          <div class="row">
+            <div class="price">{% if p.price_min %}Desde {{ p.price_min }}{% endif %}</div>
+            <span class="badge">Ver</span>
+          </div>
+        </div>
+      </a>
     </article>
-  {% empty %}<p>No hay productos</p>{% endfor %}
+  {% empty %}
+    <p>No hay productos.</p>
+  {% endfor %}
 </div>
 {% endblock %}
