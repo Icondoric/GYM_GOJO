@@ -1,9 +1,11 @@
 <!doctype html><html lang="es">
 <head>
+  {% load static %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{% block title %}GOYO · Fuerza, Energía y Comunidad{% endblock %}</title>
-  <link rel="stylesheet" href="/static/base.css">
+  <link rel="stylesheet" href="{% static 'base.css' %}">
+  {% block extra_head %}{% endblock %}
 </head>
 <body>
   <header class="header">

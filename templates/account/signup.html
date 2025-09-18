@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load i18n account socialaccount static %}
+{% block title %}{% trans "Crear cuenta" %} · GOYO{% endblock %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="auth-wrap container-wide section">
+  <div class="auth-card">
+    <header class="auth-header">
+      <h1 class="auth-title">{% trans "Crea tu cuenta" %}</h1>
+      <p class="auth-subtitle">{% trans "Únete a GOYO y empieza hoy" %}</p>
+    </header>
+
+    {% if form.non_field_errors %}
+      <div class="auth-alert">
+        {{ form.non_field_errors }}
+      </div>
+    {% endif %}
+
+    <form class="auth-form" method="post" action="{% url 'account_signup' %}">
+      {% csrf_token %}
+
+      {% for field in form %}
+        <div class="field">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.help_text %}<small class="help">{{ field.help_text|safe }}</small>{% endif %}
+          {% if field.errors %}<small class="error">{{ field.errors|striptags }}</small>{% endif %}
+        </div>
+      {% endfor %}
+
+      <button class="btn btn--primary" type="submit">{% trans "Crear cuenta" %}</button>
+    </form>
+
+    {% if socialaccount_providers %}
+    <div class="divider"><span>{% trans "o regístrate con" %}</span></div>
+    <div class="social-grid">
+      {% include "socialaccount/snippets/provider_list.html" with process="signup" %}
+    </div>
+    {% endif %}
+
+    <footer class="auth-footer">
+      <span>{% trans "¿Ya tienes cuenta?" %}</span>
+      <a class="link" href="{% url 'account_login' %}">{% trans "Inicia sesión" %}</a>
+    </footer>
+  </div>
+
+  <aside class="auth-hero">
+    <h2>GOYO</h2>
+    <p>{% trans "Convierte tu constancia en resultados medibles." %}</p>
+  </aside>
+</section>
+{% endblock %}

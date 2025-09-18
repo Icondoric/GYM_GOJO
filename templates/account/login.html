@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load i18n account socialaccount static %}
+{% block title %}{% trans "Iniciar sesión" %} · GOYO{% endblock %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="auth-wrap container-wide section">
+  <div class="auth-card">
+    <header class="auth-header">
+      <h1 class="auth-title">{% trans "Bienvenido de nuevo" %}</h1>
+      <p class="auth-subtitle">{% trans "Accede a tu cuenta para continuar" %}</p>
+    </header>
+
+    {% if form.non_field_errors %}
+      <div class="auth-alert">
+        {{ form.non_field_errors }}
+      </div>
+    {% endif %}
+
+    <form class="auth-form" method="post" action="{% url 'account_login' %}">
+      {% csrf_token %}
+      <div class="field">
+        <label for="id_login">{% trans "Correo o Usuario" %}</label>
+        {{ form.login }}
+        {% if form.login.errors %}<small class="error">{{ form.login.errors|striptags }}</small>{% endif %}
+      </div>
+
+      <div class="field">
+        <label for="id_password">{% trans "Contraseña" %}</label>
+        <div class="password-group">
+          {{ form.password }}
+          <button type="button" class="toggle-password" aria-label="{% trans 'Mostrar/Ocultar contraseña' %}">👁</button>
+        </div>
+        {% if form.password.errors %}<small class="error">{{ form.password.errors|striptags }}</small>{% endif %}
+      </div>
+
+      <div class="field field--row">
+        <label class="checkbox">
+          {{ form.remember }}
+          <span>{% trans "Recordarme" %}</span>
+        </label>
+        <a class="link" href="{% url 'account_reset_password' %}">{% trans "¿Olvidaste tu contraseña?" %}</a>
+      </div>
+
+      <button class="btn btn--primary" type="submit">{% trans "Iniciar sesión" %}</button>
+    </form>
+
+    {% if socialaccount_providers %}
+    <div class="divider"><span>{% trans "o continúa con" %}</span></div>
+    <div class="social-grid">
+      {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+    </div>
+    {% endif %}
+
+    <footer class="auth-footer">
+      <span>{% trans "¿No tienes cuenta?" %}</span>
+      <a class="link" href="{% url 'account_signup' %}">{% trans "Crear cuenta" %}</a>
+    </footer>
+  </div>
+
+  <aside class="auth-hero">
+    <h2>GOYO</h2>
+    <p>{% trans "Entrena, progresa y lleva el control de tus membresías." %}</p>
+  </aside>
+</section>
+
+<script>
+  const btn = document.querySelector('.toggle-password');
+  const pwd = document.querySelector('#id_password');
+  if (btn && pwd) {
+    btn.addEventListener('click', () => {
+      pwd.type = pwd.type === 'password' ? 'text' : 'password';
+    });
+  }
+</script>
+{% endblock %}
