@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block content %}
+<h1>Carrito</h1>
+<ul>
+  {% for i in cart.items.all %}
+    <li>{{i.variant}} x {{i.qty}} — {{i.subtotal}} <a href="/cart/remove/{{i.id}}/">Quitar</a></li>
+  {% empty %}<li>Vacío</li>{% endfor %}
+</ul>
+<a href="/orders/checkout/">Ir al checkout</a>
+{% endblock %}

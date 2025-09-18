@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block content %}
+<h1>Checkout</h1>
+<form method="post">{% csrf_token %}
+  <label>Nombre <input name="name" required></label>
+  <label>Teléfono <input name="phone" required></label>
+  <label>Ciudad <input name="city" required></label>
+  <label>Dirección <input name="address_line" required></label>
+  <button type="submit">Confirmar pedido</button>
+</form>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block content %}
+<h1>GOYO: tu fuerza, tu tienda</h1>
+<section>
+  <h2>Top ventas</h2>
+  <div class="grid">
+    {% for p in top_sellers %}
+      <article><a href="{{p.get_absolute_url}}">{{p.name}}</a>
+        {% if p.price_min %}<div>Desde {{p.price_min}}</div>{% endif %}
+      </article>
+    {% empty %}<p>Aún no hay productos.</p>{% endfor %}
+  </div>
+</section>
+{% endblock %}

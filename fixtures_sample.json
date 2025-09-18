@@ -1,0 +1,133 @@
+[
+  {
+    "model": "catalog.brand",
+    "pk": 1,
+    "fields": {
+      "name": "GOYO",
+      "slug": "goyo"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Suplementos",
+      "slug": "suplementos",
+      "parent": null
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Equipos",
+      "slug": "equipos",
+      "parent": null
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "Ropa",
+      "slug": "ropa",
+      "parent": null
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "Whey Protein 1kg",
+      "slug": "whey-protein-1kg",
+      "brand": 1,
+      "category": 1,
+      "sku_type": "variant",
+      "description": "Proteína de suero"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Mancuernas Ajustables",
+      "slug": "mancuernas-ajustables",
+      "brand": 1,
+      "category": 2,
+      "sku_type": "variant",
+      "description": "Par de mancuernas 2–24kg"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "Polera Dry-Fit",
+      "slug": "polera-dry-fit",
+      "brand": 1,
+      "category": 3,
+      "sku_type": "variant",
+      "description": "Tela respirable"
+    }
+  },
+  {
+    "model": "catalog.variant",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "sku": "WHEY-CHOC-1K",
+      "flavor": "Chocolate",
+      "size": "",
+      "price": "199.90",
+      "stock": 15
+    }
+  },
+  {
+    "model": "catalog.variant",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "sku": "WHEY-VAIN-1K",
+      "flavor": "Vainilla",
+      "size": "",
+      "price": "199.90",
+      "stock": 8
+    }
+  },
+  {
+    "model": "catalog.variant",
+    "pk": 3,
+    "fields": {
+      "product": 2,
+      "sku": "DB-24KG",
+      "flavor": "",
+      "size": "",
+      "price": "899.00",
+      "stock": 5
+    }
+  },
+  {
+    "model": "catalog.variant",
+    "pk": 4,
+    "fields": {
+      "product": 3,
+      "sku": "TSH-S",
+      "flavor": "",
+      "size": "S",
+      "price": "79.00",
+      "stock": 20
+    }
+  },
+  {
+    "model": "catalog.variant",
+    "pk": 5,
+    "fields": {
+      "product": 3,
+      "sku": "TSH-M",
+      "flavor": "",
+      "size": "M",
+      "price": "79.00",
+      "stock": 10
+    }
+  }
+]

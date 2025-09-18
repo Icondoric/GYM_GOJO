@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block content %}
+<h1>Productos en {{category.name}}</h1>
+<div class="grid">
+  {% for p in products %}
+    <article><a href="{{p.get_absolute_url}}">{{p.name}}</a>
+    {% if p.price_min %}<div>Desde {{p.price_min}}</div>{% endif %}
+    </article>
+  {% empty %}<p>No hay productos</p>{% endfor %}
+</div>
+{% endblock %}

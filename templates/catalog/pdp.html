@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% block content %}
+<h1>{{object.name}}</h1>
+<p>{{object.description}}</p>
+<ul>
+  {% for v in object.variants.all %}
+    <li>{{v.sku}} - {{v.flavor}} {{v.size}}: {{v.price}} · Stock: {{v.stock}}
+      <a href="/cart/add/{{v.id}}/">Añadir</a>
+    </li>
+  {% empty %}<li>Sin variantes</li>{% endfor %}
+</ul>
+<h3>Ingredientes</h3>
+<ul>{% for i in object.ingredients.all %}<li>{{i.name}} {{i.amount}}</li>{% empty %}<li>-</li>{% endfor %}</ul>
+<h3>Especificaciones</h3>
+<ul>{% for s in object.specs.all %}<li>{{s.name}}: {{s.value}}</li>{% empty %}<li>-</li>{% endfor %}</ul>
+{% endblock %}
