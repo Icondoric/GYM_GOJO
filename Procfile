@@ -1,1 +1,1 @@
-web: gunicorn goyo_shop.wsgi:application --log-file -
+web: gunicorn goyo_shop.wsgi
